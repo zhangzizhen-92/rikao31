@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        li{
+            list-style: none;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            float: left;
+            margin-right: 5px;
+            border: 1px solid #ccc
+        }
+
+    </style>
+</head>
+<body ng-app="app">
+    <div ng-controller="ctrl">
+
+        <ul>
+            <li ng-click="del()">-</li>
+            <li>{{num}}</li>
+            <li ng-click="add()">+</li>
+        </ul>
+
+        <p>单价：{{price | currency: "￥":2}}</p>
+        <p>总价：{{allPrice | currency:"￥":2}}</p>
+
+    </div>
+
+    <script src="js/angular.js"></script>
+    <script>
+        var app = angular.module('app',[]);
+        app.controller('ctrl',function($scope){
+            $scope.num = 0;
+            $scope.price = 12.00;
+            $scope.allPrice = 0.00;
+            $scope.del = function(){
+
+                if($scope.num > 0){
+                    $scope.num--
+                } else{
+                    return;
+                }
+                $scope.allPrice = $scope.price * $scope.num
+            };
+            $scope.add = function(){
+                    $scope.num++;
+
+                $scope.allPrice = $scope.price * $scope.num
+            }
+        })
+
+
+
+
+    </script>
+</body>
+</html>
